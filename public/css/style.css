@@ -1,0 +1,783 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+}
+
+/*Navigation */
+.navigation {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.302);
+}
+.container {
+  max-width: 1200px; /* Sesuaikan dengan lebar maksimum yang diinginkan */
+  margin: 0 auto;
+  width: 60%;
+  margin-inline: auto;
+}
+
+.navigation .box-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 13x 0 13px 0;
+  align-items: center;
+}
+.navigation .box-navigation .box img {
+  color: #3661da;
+  max-width: 250px;
+  align-items: center;
+}
+.navigation .box-navigation .menu-navigation ul {
+  display: flex;
+}
+
+.navigation .box-navigation .menu-navigation ul li {
+  display: flex; /* Mengubah tata letak elemen li menjadi flex */
+  align-items: center; /* Mengatur elemen li untuk berada di tengah secara vertikal */
+  margin-right: 40px;
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+}
+
+.navigation .box-navigation .menu-navigation ul li a {
+  text-decoration: none;
+}
+
+.custom-button {
+  text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+  display: inline-block; /* Membuat tombol tampil sebagai elemen inline-block */
+  padding: 12px 20px;
+  border: none;
+  background-color: #3661da;
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  margin-left: 100px;
+}
+
+.custom-button:hover {
+  background-color: #2c53bf;
+  cursor: pointer;
+  border-bottom: none;
+}
+
+.navigation .box-navigation .menu-navigation ul li i {
+  display: none;
+}
+
+.navigation .box-navigation .menu-navigation ul li a:hover {
+  color: #3538f7;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+
+.navigation .box-navigation .menu-bar {
+  display: none;
+}
+
+.navigation .box-navigation .menu-bar {
+  font-size: 28px;
+}
+
+.navigation .box-navigation .menu-bar i {
+  font-size: 24px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/*content 1*/
+
+.header {
+  width: 10 0%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.header .box-header {
+  display: flex;
+  align-items: center;
+}
+
+.header .box-header .box:nth-child(1) {
+  padding-right: 50px;
+}
+
+.header .box-header .box:nth-child(1) h1 {
+  font-size: 38px;
+  color: rgb(22, 58, 223);
+  margin-bottom: 20px;
+}
+
+.header .box-header .box:nth-child(1) p {
+  line-height: 2;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: medium bold;
+}
+
+.header .box-header .box:nth-child(1) a {
+  text-decoration: none;
+}
+
+.header .box-header .box:nth-child(1) button {
+  position: relative;
+  padding: 10px 60px 10px 30px; /* Akan menambahkan ruang untuk ikon panah */
+  background-color: #3661da;
+  color: white;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 28px;
+  transition: all 0.3s ease-in-out;
+}
+
+.header .box-header .box:nth-child(1) button::after {
+  content: "\f178"; /* Kode Unicode untuk ikon panah (fa-arrow-right) */
+  font-family: "Font Awesome 5 Free"; /* Pastikan Anda menggunakan nama font yang tepat */
+  font-weight: 900;
+  font-size: 19px;
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+}
+
+.header .box-header .box:nth-child(1) button:hover {
+  background-color: #0d44d8;
+}
+
+.header .box-header .box:nth-child(2) img {
+  width: 500px;
+}
+
+.header .box-header .box:nth-child(2) {
+  border-radius: 100px;
+}
+
+/*Content2*/
+
+.body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: white;
+}
+
+.container-2 {
+  width: 60%;
+  padding: 15px;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.body .container-2 p {
+  margin-bottom: 20px;
+}
+
+.slider .slick-slide {
+  border: none;
+}
+
+.slider .slick-slide img {
+  width: 100%;
+}
+
+/* make button larger and change their positions */
+.slick-prev,
+.slick-next {
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 5px;
+}
+
+.slick-next {
+  right: 5px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 4 0px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* move dotted nav position */
+.slick-dots {
+  bottom: 15px;
+}
+
+/* enlarge dots and change their colors */
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #dedede;
+}
+
+/* hide dots and arrow buttons when slider is not hovered */
+.slider:not(:hover) .slick-arrow,
+.slider:not(:hover) .slick-dots {
+  opacity: 0;
+}
+
+/* transition effects for opacity */
+.slick-arrow,
+.slick-dots {
+  transition: opacity 0.5s ease-out;
+}
+
+/* FOOter */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul {
+  list-style: none;
+}
+.footer {
+  background-color: #125dad;
+  padding: 20px 0;
+}
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+.footer-col h4 {
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+.footer-col h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: #ffffff;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+}
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+.footer-copyright {
+  text-align: center;
+  padding: 5px 0;
+  background-color: #125dad;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.footer-col .social-links img {
+  width: 250px;
+  display: flex;
+}
+
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+/*responsive*/
+@media (max-width: 990px) {
+  .footer-col .social-links img {
+    width: 250px;
+  }
+}
+
+@media (max-width: 780px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 580px) {
+  .footer-col {
+    width: 100%;
+  }
+  .footer-col .social-links img {
+    width: 250px;
+  }
+}
+
+/*ukuran normal web */
+@media (max-width: 1200px) {
+  .header .box-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .header .box-header .box:nth-child(2) img {
+    max-width: 500px;
+    align-items: center;
+    margin: 100px;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .container {
+    width: 80%;
+  }
+  .navigation .box-navigation .box img {
+    max-width: 80%;
+  }
+
+  .navigation .box-navigation .menu-bar {
+    display: block;
+  }
+  /*menu bar*/
+
+  .navigation .box-navigation .menu-navigation {
+    position: absolute;
+    background-color: white;
+    top: 100%;
+    right: 100px;
+    width: 250px;
+    transform: translate(
+      0,
+      -5px
+    ); /* Mengubah transformasi untuk membuat menu di bawah navigasi */
+    transition: all 0.5s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.302);
+    display: none; /* Awalnya sembunyikan menu-navigation */
+    z-index: 1000;
+    border-radius: 7px;
+  }
+  .navigation .box-navigation .menu-navigation ul li a button {
+    width: 140px;
+    margin: 10px;
+    display: block;
+  }
+  .navigation .box-navigation .menu-navigation.active {
+    top: 100px;
+    transform: translate(0, 0);
+  }
+
+  .navigation .box-navigation .menu-navigation ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navigation .box-navigation .menu-navigation ul li {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 0;
+    padding-right: 30px;
+  }
+
+  .navigation .box-navigation .menu-navigation ul li i {
+    display: inline-block;
+  }
+
+  .navigation .box-navigation .menu-navigation ul li a {
+    padding-right: 10px;
+  }
+
+  /*Content*/
+
+  .header .box-header {
+    display: flex;
+    flex-direction: column;
+  }
+  .header .box-header .box:nth-child(1) {
+    font-size: 30px;
+    justify-content: center;
+  }
+
+  .header .box-header .box:nth-child(2) img {
+    max-width: 500px;
+    margin: 100px;
+  }
+
+  .body .container-2 .slider img {
+    max-width: 500px;
+  }
+}
+
+/*ukuran dekstop */
+
+@media screen and (max-width: 835px) {
+  .navigation .box-navigation .menu-navigation {
+    right: 70px;
+  }
+
+  .header .box-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .box-header .box:nth-child(1) {
+    padding: 0;
+    text-align: center;
+  }
+
+  .header .box-header .box:nth-child(1) h1 {
+    font-size: 45px;
+  }
+  .header .box-header .box:nth-child(1) p {
+    font-size: 20px;
+  }
+  .header .box-header .box:nth-child(2) {
+    margin-bottom: 30px;
+  }
+
+  .header .box-header .box:nth-child(2) img {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .navigation .box-navigation .menu-navigation {
+    right: 40px;
+  }
+  .navigation .box-navigation .menu-bar i {
+    font-size: 20px;
+  }
+
+  .navigation .box-navigation .box img {
+    width: 250px;
+  }
+
+  .header .box-header .box:nth-child(1) h1 {
+    font-size: 28px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(1) p {
+    font-size: 14.5px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(1) button {
+    position: relative;
+    font-size: 15px; /* Adjust the font size to make the button smaller */
+    font-weight: medium bold;
+    padding: 10px 10px; /* Adjust the padding for a smaller button */
+    width: 40%; /* Adjust the width for a smaller button */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #3661da;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* Adjust the border radius for a smaller button */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .header .box-header .box:nth-child(1) button::after {
+    content: "\f178"; /* Unicode for the arrow icon (fa-arrow-right) */
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    font-size: 17px; /* Adjust the icon size for a smaller button */
+    position: absolute;
+    top: 51%;
+    right: 20px; /* Adjust the icon position for a smaller button */
+    transform: translateY(-50%);
+  }
+
+  .header .box-header .box:nth-child(1) button:hover {
+    background-color: #0043fb;
+  }
+
+  .header .box-header .box:nth-child(2) img {
+    width: 300px;
+  }
+
+  .body .container-2 p {
+    margin-bottom: 20px;
+  }
+
+  .body .container-2 .slider img {
+    max-width: 200%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 500px) {
+  .navigation .box-navigation .menu-navigation ul li i {
+    display: none;
+  }
+
+  .navigation .box-navigation .menu-navigation {
+    right: 40px;
+  }
+
+  .navigation .box-navigation .box img {
+    width: 300px;
+  }
+
+  .header .box-header .box:nth-child(1) h1 {
+    font-size: 28px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(1) p {
+    font-size: 17px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(2) img {
+    width: 350px;
+  }
+
+  .header .box-header .box:nth-child(1) button {
+    position: relative;
+    font-size: 17px; /* Adjust the font size to make the button smaller */
+    font-weight: medium bold;
+    padding: 10px 10px; /* Adjust the padding for a smaller button */
+    width: 55%; /* Adjust the width for a smaller button */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #3661da;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* Adjust the border radius for a smaller button */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .header .box-header .box:nth-child(1) button::after {
+    content: "\f178"; /* Unicode for the arrow icon (fa-arrow-right) */
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    font-size: 17px; /* Adjust the icon size for a smaller button */
+    position: absolute;
+    top: 51%;
+    right: 12px; /* Adjust the icon position for a smaller button */
+    transform: translateY(-51%);
+  }
+}
+
+@media (max-width: 415px) {
+  .navigation .box-navigation .menu-navigation ul li i {
+    display: none;
+  }
+
+  .navigation .box-navigation .menu-navigation {
+    right: 40px;
+  }
+
+  .navigation .box-navigation .box img {
+    width: 300px;
+  }
+
+  .header .box-header .box:nth-child(1) h1 {
+    font-size: 28px;
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(1) p {
+    font-size: 17px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(2) img {
+    width: 350px;
+  }
+
+  .header .box-header .box:nth-child(1) button {
+    position: relative;
+    font-size: 17px; /* Adjust the font size to make the button smaller */
+    font-weight: medium bold;
+    padding: 10px 10px; /* Adjust the padding for a smaller button */
+    width: 55%; /* Adjust the width for a smaller button */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #3661da;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* Adjust the border radius for a smaller button */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .header .box-header .box:nth-child(1) button::after {
+    content: "\f178"; /* Unicode for the arrow icon (fa-arrow-right) */
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    font-size: 17px; /* Adjust the icon size for a smaller button */
+    position: absolute;
+    top: 51%;
+    right: 12px; /* Adjust the icon position for a smaller button */
+    transform: translateY(-51%);
+  }
+}
+
+@media (max-width: 390px) {
+  .navigation .box-navigation .menu-navigation ul li i {
+    display: none;
+  }
+
+  .navigation .box-navigation .menu-navigation {
+    right: 40px;
+  }
+
+  .navigation .box-navigation .box img {
+    width: 200px;
+  }
+
+  .header .box-header .box:nth-child(1) h1 {
+    font-size: 28px;
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .header .box-header .box:nth-child(1) p {
+    font-size: 14.5px;
+    text-align: left;
+  }
+
+  .body .container-2 .slider img {
+    width: 400%; /* Anda dapat mengganti nilai ini sesuai kebutuhan untuk memperbesar gambar */
+    height: auto;
+
+    .header .box-header .box:nth-child(1) button {
+      position: relative;
+      font-size: 15px; /* Adjust the font size to make the button smaller */
+      font-weight: medium bold;
+      padding: 10px 10px; /* Adjust the padding for a smaller button */
+      width: 60%; /* Adjust the width for a smaller button */
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background-color: #3661da;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px; /* Adjust the border radius for a smaller button */
+      transition: all 0.3s ease-in-out;
+    }
+
+    .header .box-header .box:nth-child(1) button::after {
+      content: "\f178"; /* Unicode for the arrow icon (fa-arrow-right) */
+      font-family: "Font Awesome 5 Free";
+      font-weight: bold;
+      font-size: 17px; /* Adjust the icon size for a smaller button */
+      position: absolute;
+      top: 51%;
+      right: 20px; /* Adjust the icon position for a smaller button */
+      transform: translateY(-51%);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .navigation .box-navigation .menu-navigation ul li i {
+      display: none;
+    }
+
+    .navigation .box-navigation .menu-navigation {
+      right: 40px;
+    }
+
+    .navigation .box-navigation .box img {
+      width: 250px;
+    }
+
+    .header .box-header .box:nth-child(1) h1 {
+      font-size: 28px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .header .box-header .box:nth-child(1) p {
+      font-size: 14.5px;
+      text-align: left;
+    }
+
+    .header .box-header .box:nth-child(1) button {
+      position: relative;
+      font-size: 15px; /* Adjust the font size to make the button smaller */
+      font-weight: medium bold;
+      padding: 10px 10px; /* Adjust the padding for a smaller button */
+      width: 60%; /* Adjust the width for a smaller button */
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background-color: #3661da;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px; /* Adjust the border radius for a smaller button */
+      transition: all 0.1s ease-in-out;
+    }
+
+    .header .box-header .box:nth-child(1) button::after {
+      content: "\f178"; /* Unicode for the arrow icon (fa-arrow-right) */
+      font-family: "Font Awesome 5 Free";
+      font-weight: bold;
+      font-size: 17px; /* Adjust the icon size for a smaller button */
+      position: absolute;
+      top: 51%;
+      right: 20px; /* Adjust the icon position for a smaller button */
+      transform: translateY(-49%);
+    }
+  }
+}
