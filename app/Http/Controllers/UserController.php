@@ -10,13 +10,7 @@ class UserController extends Controller
 {
     public function showHomeUserLogin($id, Request $request)
     {
-        $cookieValue = $request->cookie('userId');
-        if (!$cookieValue) {
-            return redirect('/login')->withErrors(['message' => 'Kamu belum Login!!!']);
-        }
-        if ($id !== $cookieValue) {
-            return redirect('/')->withErrors(['message' => 'Autentikasi gagal!!!']);
-        }
+
         $user = UsersModel::find($id);
         return view('user/homeUserLogin', compact(['user']));
     }

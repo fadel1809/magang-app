@@ -22,13 +22,14 @@ Route::get('/', function () {
 });
 
 
-Route::post('/login', [authController::class, 'login']);
-Route::post('/register', [authController::class, 'register']);
+Route::middleware('InputLoginValidation')->post('/login', [authController::class, 'login']);
+Route::middleware('InputRegistrationValidation')->post('/register', [authController::class, 'register']);
 Route::get('/register', [authController::class, 'showRegisterForm']);
 Route::get('/login', [authController::class, 'showLoginForm']);
 
 
-Route::get('user/{id}', [UserController::class, 'showHomeUserLogin']);
-Route::get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
+Route::middleware('SecurePage:id,')->get('user/{id}', 'UserController@id');
+
+Route::middleware('SecurePage:id')->get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
 Route::post('/user/{id}/logout', [UserController::class, 'logout']);
-Route::get('/user/{id}/lowongan', [UserController::class, 'showLowongan']);
+Route::middleware('SecurePage:id')->get('/user/{id}/lowongan', [UserController::class, 'showLowongan']);
