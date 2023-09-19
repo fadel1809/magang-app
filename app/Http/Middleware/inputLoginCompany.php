@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginInputValidation
+class inputLoginCompany
 {
     /**
      * Handle an incoming request.
@@ -24,7 +24,6 @@ class LoginInputValidation
             'password.required' => 'kolom password kosong!',
             'password.min' => 'password minimal 8 karakter!',
         ]);
-        $request->merge(['errorMessage' => $errorMessage]);
         return $next($request, $errorMessage);
     }
 }

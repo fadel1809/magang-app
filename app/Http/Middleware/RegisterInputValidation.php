@@ -32,6 +32,7 @@ class RegisterInputValidation
             'location.required' => 'kolom lokasi kosong!',
             'notelp' => 'kolom nomor telpon kosong!'
         ]);
-        return $next($request, $errorMessage);
+        $request->merge(['errorMessage' => $errorMessage]);
+        return $next($request);
     }
 }

@@ -10,19 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-
-        Schema::create('Users', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('name');
-            $table->string('school');
-            $table->string('cv')->nullable();
             $table->string('location');
-            $table->string('notelp');
-            $table->enum('role', ['user', 'admin', 'superAdmin'])->default('user');
+            $table->string('photo')->nullable();
         });
-
     }
 
     /**
@@ -30,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('Users');
+        Schema::dropIfExists('companies');
     }
 };

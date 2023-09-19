@@ -21,6 +21,12 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/company-login', [authController::class, 'showLoginCompanyForm']);
+Route::get('/company-register', [authController::class, 'showRegisterCompanyForm']);
+Route::middleware('inputLoginCompany')->post('/company-login', [authController::class, 'loginCompany']);
+Route::post('/company-register', [authController::class, 'registerCompany']);
+
+
 
 Route::middleware('InputLoginValidation')->post('/login', [authController::class, 'login']);
 Route::middleware('InputRegistrationValidation')->post('/register', [authController::class, 'register']);
@@ -28,7 +34,7 @@ Route::get('/register', [authController::class, 'showRegisterForm']);
 Route::get('/login', [authController::class, 'showLoginForm']);
 
 
-Route::middleware('SecurePage:id,')->get('user/{id}', 'UserController@id');
+Route::middleware('SecurePage:id,')->get('/user/{id}', [UserController::class, 'showHomeUser']);
 
 Route::middleware('SecurePage:id')->get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
 Route::post('/user/{id}/logout', [UserController::class, 'logout']);

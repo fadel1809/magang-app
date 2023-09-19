@@ -18,11 +18,12 @@ class SecurePageValidation
 
         $cookieValue = $request->cookie('userId');
         if (!$cookieValue) {
+            if ($id !== $cookieValue) {
+                return redirect('/')->withErrors(['message' => 'Autentikasi gagal!!!']);
+            }
             return redirect('/login')->withErrors(['message' => 'Kamu belum Login!!!']);
         }
-        if ($id !== $cookieValue) {
-            return redirect('/')->withErrors(['message' => 'Autentikasi gagal!!!']);
-        }
+
         return $next($request);
     }
 }
