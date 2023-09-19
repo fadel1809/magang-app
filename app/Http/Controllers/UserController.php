@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
-    public function showHomeUserLogin($id, Request $request)
+    public function showHomeUser($id, Request $request)
     {
 
         $user = UsersModel::find($id);

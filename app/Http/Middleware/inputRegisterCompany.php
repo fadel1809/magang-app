@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginInputValidation
+class inputRegisterCompany
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,13 @@ class LoginInputValidation
     public function handle(Request $request, Closure $next): Response
     {
         $errorMessage = $request->validate([
+            'nama' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'address' => 'required'
         ], [
-            'email.required' => 'kolom email kosong!',
-            'email.email' => 'email tidak valid!',
-            'password.required' => 'kolom password kosong!',
-            'password.min' => 'password minimal 8 karakter!',
+            'nama.required' => 'Nama harus diisi!'
         ]);
-        $request->merge(['errorMessage' => $errorMessage]);
-        return $next($request, $errorMessage);
+        return $next($request);
     }
 }

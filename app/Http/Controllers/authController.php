@@ -10,47 +10,52 @@ use Illuminate\Support\Facades\Cookie;
 
 class authController extends Controller
 {
-    public function login(Request $request, $errorMessage)
+    public function loginCompany(Request $request)
     {
 
+    }
+    public function registerCompany()
+    {
+
+    }
+    public function login(Request $request)
+    {
+        $requestData = $request->all();
+        $errorMessage = $requestData['errorMessage'];
         if (!$errorMessage) {
-            return redirect()->back()->withErrors(['message' => $errorMessage]);
+            return redirect('/login')->withErrors(['message' => $errorMessage]);
 
         }
-        $requestData = $request->all();
         $email = $requestData['email'];
         $userEmail = UsersModel::where('email', $email)->first();
         if (!$userEmail) {
-            return redirect()->back()->withErrors(['message' => 'email tidak ditemukan!']);
+            return redirect('/login')->withErrors(['message' => 'email tidak ditemukan!']);
         }
         $userPass = $requestData['password'];
         $passwordDB = $userEmail['password'];
         $id = $userEmail['id'];
         $role = $userEmail['role'];
         if (Hash::check($userPass, $passwordDB)) {
-            if ($role == 'admin') {
-                $oneDay = 60 * 24;
-                Cookie::queue('userId', $id, $oneDay);
-                return redirect('admin/' . $id);
-            }
             if ($role == 'superAdmin') {
                 $oneDay = 60 * 24;
                 Cookie::queue('userId', $id, $oneDay);
-                return redirect('super-admin/' . $id);
+                return redirect('/' . 'super-admin/' . $id);
             }
             $oneDay = 60 * 24;
             Cookie::queue('userId', $id, $oneDay);
-            return redirect('user/' . $id);
+            return redirect('/user' . '/' . $id)->withErrors(['message' => 'password checked']);
         } else {
-            return redirect()->back()->withErrors(['message' => 'Password salah']);
+            return redirect('/login')->withErrors(['message' => 'Password salah']);
         }
+
     }
-    public function register(Request $request, $errorMessage)
+    public function register(Request $request)
     {
         $requestData = $request->all();
         $password = $requestData['password'];
         $hashedPassword = Hash::make($password, ['rounds' => 12]);
         $requestData['password'] = $hashedPassword;
+        $errorMessage = $requestData['errorMessage'];
         $user = UsersModel::create($requestData);
         if (!$user) {
             return redirect()->back()->withErrors(['message' => $errorMessage]);
@@ -64,5 +69,13 @@ class authController extends Controller
     public function showLoginForm()
     {
         return view('login');
+    }
+    public function showLoginCompanyForm()
+    {
+        return view('loginCompany');
+    }
+    public function showRegisterCompanyForm()
+    {
+        return view('registerCompany');
     }
 }
