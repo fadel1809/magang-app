@@ -24,6 +24,7 @@ class inputLoginCompany
             'password.required' => 'kolom password kosong!',
             'password.min' => 'password minimal 8 karakter!',
         ]);
-        return $next($request, $errorMessage);
+        $request->merge(['errorMessage'=> $errorMessage]);
+        return $next($request);
     }
 }

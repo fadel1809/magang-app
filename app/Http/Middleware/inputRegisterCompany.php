@@ -19,10 +19,18 @@ class inputRegisterCompany
             'nama' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'address' => 'required'
+            'notelp' => 'required',
+            'location' => 'required'
         ], [
-            'nama.required' => 'Nama harus diisi!'
+            'nama.required' => 'Nama harus diisi!',
+            'email.required' => 'email harus diisi!',
+            'email.email' => 'format email tidak valid',
+            'password.required' => 'password harus diisi',
+            'password.min' => 'password minimal 8',
+            'notelp.required' => 'no telpon harus diisi!',
+            'location.required' => 'alamat harus diisi!'
         ]);
+        $request->merge(['errorMessage' => $errorMessage]);
         return $next($request);
     }
 }

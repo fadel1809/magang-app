@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
@@ -24,8 +25,8 @@ Route::get('/', function () {
 Route::get('/company-login', [authController::class, 'showLoginCompanyForm']);
 Route::get('/company-register', [authController::class, 'showRegisterCompanyForm']);
 Route::middleware('inputLoginCompany')->post('/company-login', [authController::class, 'loginCompany']);
-Route::post('/company-register', [authController::class, 'registerCompany']);
-
+Route::middleware('inputRegisterCompany')->post('/company-register', [authController::class, 'registerCompany']);
+Route::get('/company/{id}', [CompanyController::class, 'showHomeCompany']);
 
 
 Route::middleware('InputLoginValidation')->post('/login', [authController::class, 'login']);
@@ -34,7 +35,7 @@ Route::get('/register', [authController::class, 'showRegisterForm']);
 Route::get('/login', [authController::class, 'showLoginForm']);
 
 
-Route::middleware('SecurePage:id,')->get('/user/{id}', [UserController::class, 'showHomeUser']);
+Route::middleware('SecurePageValidation')->get('/user/{id}', [UserController::class, 'showHomeUser']);
 
 Route::middleware('SecurePage:id')->get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
 Route::post('/user/{id}/logout', [UserController::class, 'logout']);

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('location');
             $table->string('photo')->nullable();
+            $table->enum('status', ['accept', 'pending'])->default('pending');
         });
     }
 

@@ -9,6 +9,14 @@
     <title>Register Company</title>
 </head>
 <body>
+     @if ($errors->any())
+    <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        
+    </div>
+@endif
     <h1>Daftar admin</h1>
     <form action='/company-register' method="POST">
         @csrf
@@ -18,6 +26,8 @@
             <input type="email" name="email" class="form-control" required><br>
              <label for="">Password</label>
             <input type="password" name="password" class="form-control" required><br>
+            <label for="">No telpon</label>
+            <input type="text" name="notelp" class="form-control" required><br>
             <label for="">Address</label>
             <textarea class="form-control" name="location" id="" cols="20" rows="5"></textarea>
          

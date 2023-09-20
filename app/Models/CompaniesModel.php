@@ -11,4 +11,5 @@ class CompaniesModel extends Model
     protected $table = 'companies';
     protected $guarded = [];
     public $timestamps = false;
+    protected $fillable = ['nama', 'email', 'password', 'location', 'notelp'];
 }

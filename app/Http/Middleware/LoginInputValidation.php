@@ -25,6 +25,6 @@ class LoginInputValidation
             'password.min' => 'password minimal 8 karakter!',
         ]);
         $request->merge(['errorMessage' => $errorMessage]);
-        return $next($request, $errorMessage);
+        return $next($request);
     }
 }

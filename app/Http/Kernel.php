@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\inputLoginCompany;
+use App\Http\Middleware\inputRegisterCompany;
 use App\Http\Middleware\LoginInputValidation;
 use App\Http\Middleware\RegisterInputValidation;
 use App\Http\Middleware\SecurePageValidation;
@@ -67,8 +69,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'SecurePage' => SecurePageValidation::class,
+        'SecurePageValidation' => SecurePageValidation::class,
         'InputRegistrationValidation' => RegisterInputValidation::class,
-        'InputLoginValidation' => LoginInputValidation::class
+        'InputLoginValidation' => LoginInputValidation::class,
+        'inputRegisterCompany' => inputRegisterCompany::class,
+        'inputLoginCompany' => inputLoginCompany::class
     ];
 }

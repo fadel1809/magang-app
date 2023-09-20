@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    {{$user->id}}
+    <p>company login</p>
 </body>
 </html>

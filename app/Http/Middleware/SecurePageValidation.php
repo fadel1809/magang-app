@@ -13,17 +13,14 @@ class SecurePageValidation
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $id): Response
-    {
 
+    public function handle(Request $request, Closure $next): Response
+    {
         $cookieValue = $request->cookie('userId');
         if (!$cookieValue) {
-            if ($id !== $cookieValue) {
-                return redirect('/')->withErrors(['message' => 'Autentikasi gagal!!!']);
-            }
             return redirect('/login')->withErrors(['message' => 'Kamu belum Login!!!']);
+        } else {
+            return $next($request);
         }
-
-        return $next($request);
     }
 }
