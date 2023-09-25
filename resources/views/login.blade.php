@@ -19,7 +19,7 @@
     <h1>login</h1>
     <form action='/login' method="POST">
         @csrf
-             <label for="">Email</label>
+             <label for="" class="form-label">Email</label>
             <input type="email" name="email" class="form-control" required><br>
              <label for="">Password</label>
             <input type="password" name="password" class="form-control" required><br>

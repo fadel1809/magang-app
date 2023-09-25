@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\editUserValidation;
 use App\Http\Middleware\inputLoginCompany;
 use App\Http\Middleware\inputRegisterCompany;
 use App\Http\Middleware\LoginInputValidation;
@@ -73,6 +74,7 @@ class Kernel extends HttpKernel
         'InputRegistrationValidation' => RegisterInputValidation::class,
         'InputLoginValidation' => LoginInputValidation::class,
         'inputRegisterCompany' => inputRegisterCompany::class,
-        'inputLoginCompany' => inputLoginCompany::class
+        'inputLoginCompany' => inputLoginCompany::class,
+        'editUserValidation' => editUserValidation::class
     ];
 }

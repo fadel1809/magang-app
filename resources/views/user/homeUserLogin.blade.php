@@ -9,7 +9,9 @@
 <body>
     <p>user Page</p>
     <p>{{$user->id}}</p>
-    <a href={{'/user'.'/'.$user->id.'/edit'}} class="btn btn-primary">Edit Profile</a>
+    <a href="{{'/user'.'/'.$user->id.'/edit'}}" class="btn btn-primary">Edit Profile</a>
+    <a href="{{'/user'.'/'.$user->id.'/lowongan'}}" class="btn btn-success" >cari magang</a>
+    <a href="{{'/user'.'/'.$user->id.'/lowongan-user'}}" class="btn btn-success" > Lowongan saya</a>
     <form action={{'/user'.'/'.$user->id.'/logout'}} method="POST">
         @csrf
         <button type="submit">Logout</button>

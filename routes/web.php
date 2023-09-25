@@ -37,6 +37,8 @@ Route::get('/login', [authController::class, 'showLoginForm']);
 
 Route::middleware('SecurePageValidation')->get('/user/{id}', [UserController::class, 'showHomeUser']);
 
-Route::middleware('SecurePage:id')->get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
+Route::middleware('SecurePageValidation')->get('/user/{id}/edit', [UserController::class, 'showFormEdit']);
+Route::middleware('editUserValidation')->put('/user/{id}/edit', [UserController::class, 'edit']);
 Route::post('/user/{id}/logout', [UserController::class, 'logout']);
-Route::middleware('SecurePage:id')->get('/user/{id}/lowongan', [UserController::class, 'showLowongan']);
+Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan', [UserController::class, 'showLowongan']);
+Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan-user', [UserController::class, 'showLowonganUser']);
