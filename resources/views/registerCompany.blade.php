@@ -22,6 +22,8 @@
         @csrf
           <label for="">Nama</label>
             <input type="text" name="nama" class="form-control" required><br>
+            <label for="">Nama Perusahaan</label>
+            <input type="text" name="companyName" class="form-control" required><br>
              <label for="">Email</label>
             <input type="email" name="email" class="form-control" required><br>
              <label for="">Password</label>

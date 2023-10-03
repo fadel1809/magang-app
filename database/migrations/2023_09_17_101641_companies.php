@@ -13,9 +13,12 @@ return new class extends Migration {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('email');
+            $table->string('companyName');
+            $table->longText('companyProfile')->nullable();
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('location');
+            $table->string('notelp')->unique();
             $table->string('photo')->nullable();
             $table->enum('status', ['accept', 'pending'])->default('pending');
         });

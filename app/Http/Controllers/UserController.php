@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CustomMiddleware;
+use App\Models\LamaranModels;
+use App\Models\LowonganModels;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class UserController extends Controller
@@ -25,8 +29,21 @@ class UserController extends Controller
         return view('user/homeUserLogin', compact(['user']));
 
     }
+    public function downloadPDF($id, $filename)
+    {
+        // Define the path to the PDF file
+        $filePath = public_path('pdfs/' . $filename);
+        return response()->download($filePath);
+
+
+    }
     public function edit($id, Request $request)
     {
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
+        }
         $requestData = $request->all();
         $errorMessage = $requestData['errorMessage'];
         if (!$errorMessage) {
@@ -39,11 +56,16 @@ class UserController extends Controller
 
         $pdf = $request->file('cv');
         if ($pdf) {
-            $destination = 'pdfs';
             $request->validate([
                 'cv' => 'mimes:pdf|max:2048'
             ]);
-            $pdfName = $record->name . '_' . $record->id . '.' . $pdf->getClientOriginalExtension();
+            $destination = 'pdfs';
+            $fileExists = $record->cv;
+            $filePathOld = public_path('pdfs/' . $fileExists);
+            if ($fileExists) {
+                unlink($filePathOld);
+            }
+            $pdfName = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
             if ($pdf->move($destination, $pdfName)) {
                 DB::table('users')
                     ->where('id', $id) // Replace 'id' with the column name you want to use for the update condition
@@ -77,8 +99,38 @@ class UserController extends Controller
 
 
     }
-    public function showFormEdit($id)
+    public function lamarLowongan(Request $request, $id, $idLowongan)
     {
+        $user = UsersModel::find($id);
+        $lowongan = LowonganModels::find($idLowongan);
+        if (!$user->cv) {
+            return redirect(route('user.edit', ['id' => $user->id]))->withErrors(['message' => 'Upload CV terlebih dahulu!']);
+        }
+        try {
+            //code...
+            LamaranModels::create([
+                'id_lowongan' => $lowongan->id,
+                'title_lowongan' => $lowongan->title,
+                'location' => $lowongan->location,
+                'company_id' => $lowongan->created_by,
+                'company' => $lowongan->name,
+                'created_by' => $user->id,
+                'email_user' => $user->email,
+                'cv_user' => $user->cv
+            ]);
+            return redirect(route('lowongan.user', ['id' => $id]))->with(['message' => 'Berhasil melamar di' . $lowongan->name]);
+        } catch (\Exception $e) {
+            //throw $th;
+            return dd($e);
+        }
+    }
+    public function showFormEdit($id, Request $request)
+    {
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
+        }
         $user = UsersModel::find($id);
         return view('user/editUserProfile', compact(['user']));
     }
@@ -88,12 +140,37 @@ class UserController extends Controller
         return redirect('/')->withCookie(Cookie::forget('userId'));
     }
 
-    public function showLowongan($id)
+    public function showLowongan(Request $request, $id)
     {
-        return view('/user/showAllLowongan');
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
+        }
+        $user = UsersModel::find($id);
+        $lowongan = LowonganModels::all();
+        return view('/user/showAllLowongan', ['lowongan' => $lowongan], compact('user'));
     }
-    public function showLowonganUser($id)
+    public function showLowonganPage(Request $request, $id, $idLowongan)
     {
-        return view('/user/showLowonganUser');
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
+        }
+        $user = UsersModel::find($id);
+        $lowongan = LowonganModels::find($idLowongan);
+        return view('/user/lowonganPage', compact('lowongan'), compact('user'));
+    }
+    public function showLowonganUser(Request $request, $id)
+    {
+        $idCookie = intval($request->cookie('userId'));
+        $idParam = intval($id);
+        if ($idParam !== $idCookie) {
+            return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
+        }
+        $lamaran = LamaranModels::where('created_by', '=', $id)->get();
+
+        return view('/user/showLowonganUser', ['lamaran' => $lamaran]);
     }
 }

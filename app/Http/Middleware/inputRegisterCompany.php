@@ -20,9 +20,11 @@ class inputRegisterCompany
             'email' => 'required|email',
             'password' => 'required|min:8',
             'notelp' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'companyName' => 'required'
         ], [
             'nama.required' => 'Nama harus diisi!',
+            'companyName.required' => 'Nama perusahaan harus diisi!',
             'email.required' => 'email harus diisi!',
             'email.email' => 'format email tidak valid',
             'password.required' => 'password harus diisi',

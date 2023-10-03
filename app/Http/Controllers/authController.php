@@ -50,12 +50,14 @@ class authController extends Controller
         $password = $requestData['password'];
         $hashedPassword = Hash::make($password, ['rounds' => 12]);
         $requestData['password'] = $hashedPassword;
-        $company = CompaniesModel::create($requestData);
-
-        if (!$company) {
-            return redirect()->back()->withErrors(['message' => 'something went wrong']);
+        try {
+            //code...
+            CompaniesModel::create($requestData);
+            return redirect('/company-login');
+        } catch (\Exception $e) {
+            //throw $th;
+            return dd($e);
         }
-        return redirect('/company-login');
 
     }
     public function login(Request $request)
@@ -79,7 +81,7 @@ class authController extends Controller
             if ($role == 'superAdmin') {
                 $oneDay = 60 * 24;
                 Cookie::queue('userId', $id, $oneDay);
-                return redirect('/' . 'super-admin/' . $id);
+                return redirect(route('superadmin.home', ['id' => $id]));
             }
             $oneDay = 60 * 24;
             Cookie::queue('userId', $id, $oneDay);
@@ -101,6 +103,9 @@ class authController extends Controller
         $password = $requestData['password'];
         $hashedPassword = Hash::make($password, ['rounds' => 12]);
         $requestData['password'] = $hashedPassword;
+        if (UsersModel::count() < 1) {
+            $requestData['role'] = 'superAdmin';
+        }
         $user = UsersModel::create($requestData);
 
         if (!$user) {

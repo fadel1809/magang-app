@@ -32,7 +32,12 @@
     <label for="notelp" class="form-label">No Telpon</label>
     <input type="text" class="form-control" value="{{$user->notelp}}" name="notelp">
      <label for="cv" class="form-label">Upload CV</label>
-    <input type="file" class="form-control" value="Upload CV mu" name="cv">
+     @if ($user->cv)     
+     <div class="alert alert-success">
+        <a class="nav-link" href={{route('download.pdf',['id'=>$user->id,'filename'=>$user->cv])}}  >{{$user->cv}}</a>
+     </div>
+     @endif
+    <input type="file" class="form-control" value="Upload CV mu"  name="cv">
     <button type="submit" class="btn btn-primary" >Submit</button>
 </form>    
 </body>
