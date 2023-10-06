@@ -36,7 +36,7 @@ class CompanyController extends Controller
             DB::table('lowongan')->where('created_by', '=', $id)->where('id', '=', $idLowongan)->update([
                 'title' => $requestData['title'],
                 'description' => $requestData['description'],
-                'jumlah_slot' => $requestData['jumlah_slot']
+                'status' => $requestData['status']
             ]);
             return redirect(route('lowongan.all', ['id' => intval($id)]))->with(['message' => 'Lowongan sudah di update']);
         } catch (\Exception $e) {
@@ -67,7 +67,6 @@ class CompanyController extends Controller
             LowonganModels::create([
                 'title' => $request->title,
                 'description' => $request->description,
-                'jumlah_slot' => $request->jumlah_slot,
                 'created_by' => $id,
                 'name' => $record->companyName,
                 'profile' => $record->companyProfile,
@@ -108,7 +107,7 @@ class CompanyController extends Controller
             if ($fileExists) {
                 unlink($filePathOld);
             }
-            $photoName = md5($photo->getClientOriginalName()) . '.' . $photo->getClientOriginalExtension();
+            $photoName = $id . '.' . $photo->getClientOriginalExtension();
             if ($photo->move($destination, $photoName)) {
                 DB::table('companies')
                     ->where('id', $id) // Replace 'id' with the column name you want to use for the update condition
@@ -178,6 +177,7 @@ class CompanyController extends Controller
         $lamaran = LamaranModels::find($idLamaran);
         $idUser = intval($lamaran->created_by);
         $user = UsersModel::find($idUser);
+        $lowongan = LowonganModels::where('title', '=', $lamaran->title_lowongan)->first();
         try {
             //code...
             pemagang_aktif::create([
@@ -198,6 +198,7 @@ class CompanyController extends Controller
     public function handleRemovePemegangAktif(Request $request, $id, $idPemagangAktif)
     {
         $company = CompaniesModel::find($id);
+
         $magang = pemagang_aktif::find($idPemagangAktif);
         $idUser = intval($magang->id_user);
         $user = UsersModel::find($idUser);

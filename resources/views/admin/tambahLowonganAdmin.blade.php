@@ -24,8 +24,6 @@
         <input type="text" class="form-control" name="title">
         <label for="description" class="form-label">Deskripsi Pekerjaan:</label>
         <textarea name="description" cols="20" class="form-control" rows="5"></textarea>
-        <label for="jumlah_slot">Jumlah slot</label>
-        <input type="text" name="jumlah_slot" class="form-control">
         <button type="submit" class="btn btn-primary" >submit</button>
     </form>
 </body>

@@ -11,7 +11,8 @@
     <div class="container">
         <div class="card" style="width: 100%;">
     <div class="card-body">
-         <h1> {{$lowongan->name}} </h1>
+        <img class="img-fluid" src="{{asset('photos/'.$lowongan->created_by.'.jpg')}}" alt="">
+    <h1> {{$lowongan->name}} </h1>
     <h5 class="card-title">{{$lowongan->title}}</h5>
     <hr>
     <h6>Deskripsi pekerjaan {{$lowongan->title}} {{$lowongan->name}}</h6>

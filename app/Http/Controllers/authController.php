@@ -33,6 +33,9 @@ class authController extends Controller
         if (Hash::check($userPass, $passwordDB)) {
             $oneDay = 60 * 24;
             Cookie::queue('userId', $id, $oneDay);
+            if ($companyEmail['status'] != 'accept') {
+                return redirect(route('company.login'))->withErrors(['message' => 'akun sedang di cek,Tunggu admin menghubungi via email atau telepon']);
+            }
             return redirect('/company' . '/' . $id);
         } else {
             return redirect('/company-login')->withErrors(['message' => 'Password salah']);

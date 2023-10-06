@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container text-center">
+      <div class="container text-center">
 
-        <h1>Pemagang inAktif</h1>
+        <h1>Pemagang Aktif</h1>
         <table class="table">
         <thead>
             <th>#</th>
-            <th>username</th>
-            <th>email</th>
-            <th>posisi</th>
-            <th>status</th>
+            <th>User</th>
+            <th>Email</th>
+            <th>Posisi</th>
+            <th>Nama Perusahaan</th>
+            <th>Status</th>
             <th></th>
         </thead>
         @php
@@ -30,14 +30,15 @@
                 <td>{{$item->username}}</td>
                 <td>{{$item->email_user}}</td>
                 <td>{{$item->posisi}}</td>
+                <td>{{$item->companyname}}</td>
                 <td>{{$item->status}}</td>
-             <td class="d-flex justify-content-center">
-                    <form action={{route('pemagang.inaktif.remove',['id'=>$item->id_company,'idPemagangInAktif'=>$item->id])}} method="POST">
+                <td class="d-flex justify-content-center">
+                    <form action="#" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-danger" >Hapus Data</button>
+                        <button type="submit" class="btn btn-danger" >Sudah Behenti</button>
                     </form>
-                </td>   
+                </td>
             </tr>
             @endforeach
         </table>

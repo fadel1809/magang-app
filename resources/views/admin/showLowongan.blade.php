@@ -17,7 +17,6 @@
     <div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">{{$item->title}}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">{{$item->jumlah_slot}}</h6>
     <p class="card-text">{{$item->description}}</p>
     <a href={{route('lowongan.edit',['id'=>$admin->id,'idLowongan'=>$item->id])}} class="card-link">Edit</a>
     <form action={{route('lowongan.delete',['id'=>$admin->id,'idLowongan'=>$item->id])}} method="post">

@@ -18,7 +18,6 @@
     <div class="card-body">
      <h5 class="card-title">{{$item->name}}</h5>   
     <h5 class="card-title">{{$item->title}}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">{{$item->jumlah_slot}}</h6>
     <p class="card-text">{{$item->description}}</p>
     <a href={{route('lowongan.page',['id'=>$user->id,'idLowongan'=>$item->id])}} class="card-link">Lamar</a>
 </div>

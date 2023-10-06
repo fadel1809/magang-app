@@ -9,6 +9,6 @@ class LowonganModels extends Model
 {
     use HasFactory;
     protected $table = 'lowongan';
-    protected $fillable = ['title', 'description', 'jumlah_slot', 'created_by', 'name', 'profile', 'location'];
+    protected $fillable = ['title', 'description', 'created_by', 'name', 'profile', 'location'];
     protected $guarded = [];
 }

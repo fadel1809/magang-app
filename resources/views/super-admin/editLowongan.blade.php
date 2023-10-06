@@ -10,20 +10,19 @@
 </head>
 <body>
     <h1>Edit Lowongan</h1>
-    <form action={{route('lowongan.edit',['id'=>$admin->id,'idLowongan'=>$lowongan->id])}} method="POST">
+    <form action={{route('superadmin.editLowongan',['id'=>$admin->id,'idLowongan'=>$lowongan->id])}} method="POST">
     @csrf
     @method('PUT')
      <label for="title" class="form-label">Posisi:</label>
         <input type="text" class="form-control" name="title" value="{{$lowongan->title}}">
         <label for="description" class="form-label">Deskripsi Pekerjaan:</label>
         <textarea name="description" cols="20" class="form-control" rows="5">{{$lowongan->description}}</textarea>
-        <label for="description" class="form-label">Status:</label>
-        <select name="status" class="form-select" aria-label="Default select example">
+        <button type="submit" class="btn btn-primary" >submit</button>
+         <select name="status" class="form-select" aria-label="Default select example">
             <option value="" selected></option>
             <option value="available" >available</option>
             <option value="full">full</option>
         </select>
-        <button type="submit" class="btn btn-primary" >submit</button>
     </form>
 </body>
 </html>

@@ -11,5 +11,6 @@ class UsersModel extends Model
     protected $fillable = ['email', 'password', 'name', 'school', 'location', 'notelp'];
     protected $table = 'users';
     protected $guarded = [];
+    protected $hidden = ['password'];
     public $timestamps = false;
 }
