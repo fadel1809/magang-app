@@ -170,7 +170,8 @@ class UserController extends Controller
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
         $lamaran = LamaranModels::where('created_by', '=', $id)->get();
+        $user = UsersModel::find($id);
 
-        return view('/user/showLowonganUser', ['lamaran' => $lamaran]);
+        return view('/user/showLowonganUser', compact('user'), ['lamaran' => $lamaran]);
     }
 }

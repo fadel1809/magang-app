@@ -27,14 +27,14 @@ Route::get('/', function () {
 
 //route auth company
 Route::get('/company-login', [authController::class, 'showLoginCompanyForm'])->name('company.login');
-Route::get('/company-register', [authController::class, 'showRegisterCompanyForm']);
-Route::middleware('inputLoginCompany')->post('/company-login', [authController::class, 'loginCompany']);
-Route::middleware('inputRegisterCompany')->post('/company-register', [authController::class, 'registerCompany']);
+Route::get('/company-register', [authController::class, 'showRegisterCompanyForm'])->name('company.register');
+Route::middleware('inputLoginCompany')->post('/company-login', [authController::class, 'loginCompany'])->name('login.company');
+Route::middleware('inputRegisterCompany')->post('/company-register', [authController::class, 'registerCompany'])->name('register.company');
 
 //route company
-Route::middleware('SecurePageValidation')->get('/company/{id}', [CompanyController::class, 'showHomeCompany']);
+Route::middleware('SecurePageValidation')->get('/company/{id}', [CompanyController::class, 'showHomeCompany'])->name('dashboard.company');
 Route::post('/company/{id}', [CompanyController::class, 'logout'])->name('company.logout');
-Route::middleware('SecurePageValidation')->get('/company/{id}/edit', [CompanyController::class, 'showEditCompany']);
+Route::middleware('SecurePageValidation')->get('/company/{id}/edit', [CompanyController::class, 'showEditCompany'])->name('show.edit.company');
 Route::put('/company/{id}/edit', [CompanyController::class, 'editCompany'])->name('company.edit.profile');
 Route::middleware('SecurePageValidation')->get('/company/{id}/tambah-lowongan', [CompanyController::class, 'showFormTambahLowongan'])->name('company.tambah');
 Route::post('/company/{id}/tambah-lowongan', [CompanyController::class, 'tambahLowongan'])->name('company.tambah');
@@ -52,18 +52,18 @@ Route::middleware('SecurePageValidation')->get('/company/{id}/pemagang-inaktif',
 Route::put('/company/{id}/pemagang-inaktif/{idPemagangInAktif}', [CompanyController::class, 'handleRemovePemegangInAktif'])->name('pemagang.inaktif.remove');
 
 //route auth
-Route::middleware('InputLoginValidation')->post('/login', [authController::class, 'login']);
-Route::middleware('InputRegistrationValidation')->post('/register', [authController::class, 'register']);
-Route::get('/register', [authController::class, 'showRegisterForm']);
-Route::get('/login', [authController::class, 'showLoginForm']);
+Route::middleware('InputLoginValidation')->post('/login', [authController::class, 'login'])->name('login.user');
+Route::middleware('InputRegistrationValidation')->post('/register', [authController::class, 'register'])->name('register.user');
+Route::get('/register', [authController::class, 'showRegisterForm'])->name('user.register');
+Route::get('/login', [authController::class, 'showLoginForm'])->name('user.login');
 
 //route user
-Route::middleware('SecurePageValidation')->get('/user/{id}', [UserController::class, 'showHomeUser']);
+Route::middleware('SecurePageValidation')->get('/user/{id}', [UserController::class, 'showHomeUser'])->name('home.user');
 Route::middleware('SecurePageValidation')->get('/user/{id}/edit', [UserController::class, 'showFormEdit'])->name('user.edit');
 Route::middleware('editUserValidation')->put('/user/{id}/edit', [UserController::class, 'edit']);
 Route::middleware('SecurePageValidation')->get('/download-pdf/{id}/{filename}', [UserController::class, 'downloadPDF'])->name('download.pdf');
-Route::post('/user/{id}/logout', [UserController::class, 'logout']);
-Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan', [UserController::class, 'showLowongan']);
+Route::post('/user/{id}/logout', [UserController::class, 'logout'])->name('user.logout');
+Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan', [UserController::class, 'showLowongan'])->name('show.lowongan');
 Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan/{idLowongan}', [UserController::class, 'showLowonganPage'])->name('lowongan.page');
 Route::middleware('SecurePageValidation')->get('/user/{id}/lowongan-user', [UserController::class, 'showLowonganUser'])->name('lowongan.user');
 Route::post('/user/{id}/lowongan/{idLowongan}', [UserController::class, 'lamarLowongan'])->name('lamar.lowongan');

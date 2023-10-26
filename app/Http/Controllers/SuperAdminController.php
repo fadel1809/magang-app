@@ -8,6 +8,7 @@ use App\Models\LowonganModels;
 use App\Models\pemagang_aktif;
 use App\Models\pemagang_inaktif;
 use App\Models\UsersModel;
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class SuperAdminController extends Controller
 
     public function editCompany(Request $request, $id, $idCompany)
     {
-        $record = CompaniesModel::find($id);
+        $record = CompaniesModel::find($idCompany);
         if (!$record) {
             return redirect()->back()->withErrors(['message' => 'something wrong try again later']);
         }
@@ -58,7 +59,7 @@ class SuperAdminController extends Controller
                 'location' => $requestData['location']
             ]);
 
-            return redirect(route('superadmin.users', ['id' => $id]))->with('message', 'update berhasil!');
+            return redirect(route('superadmin.companies', ['id' => $id]))->with('message', 'update berhasil!');
         } catch (\Exception $e) {
             //throw $th;
             return dd($e);
@@ -109,7 +110,7 @@ class SuperAdminController extends Controller
                     'notelp' => $requestData['notelp'],
                     // Update other fields as needed
                 ]);
-            return redirect(route('superadmin.companies', ['id' => $id]))->with('message', 'update berhasil!');
+            return redirect(route('superadmin.users', ['id' => $id]))->with('message', 'update berhasil!');
         } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['message' => 'update gagal']);
@@ -201,7 +202,13 @@ class SuperAdminController extends Controller
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
         $user = UsersModel::where('id', '=', $id)->where('role', '=', 'superAdmin')->first();
-        return view('/super-admin/homeLoginSuperAdmin', compact('user'));
+        $userCount = UsersModel::where('role', '=', 'user')->count();
+        $lowonganCount = LowonganModels::count();
+        $lamaranCount = LamaranModels::count();
+        $pemagangAktifCount = pemagang_aktif::count();
+        $pemagangInAktifCount = pemagang_inaktif::count();
+        $companiesCount = CompaniesModel::count();
+        return view('/super-admin/homeLoginSuperAdmin', compact('user'), ['companiesCount' => $companiesCount, 'userCount' => $userCount, 'lowonganCount' => $lowonganCount, 'lamaranCount' => $lamaranCount, 'pemagangAktifCount' => $pemagangAktifCount, 'pemagangInAktifCount' => $pemagangInAktifCount]);
     }
     public function showAllUsers(Request $request, $id)
     {
@@ -210,9 +217,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
+        $user = UsersModel::where('id', '=', $id)->first();
         $users = UsersModel::where('role', '=', 'user')->get();
-        return view('/super-admin/showAllUsers', ['data' => $users], compact('admin'));
+        return view('/super-admin/showAllUsers', ['data' => $users], compact('user'));
     }
     public function showAllCompanies(Request $request, $id)
     {
@@ -221,9 +228,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
+        $user = UsersModel::where('id', '=', $id)->first();
         $companies = CompaniesModel::all();
-        return view('/super-admin/showAllCompanies', ['data' => $companies], compact('admin'));
+        return view('/super-admin/showAllCompanies', ['data' => $companies], compact('user'));
     }
     public function showAllLowongan(Request $request, $id)
     {
@@ -232,9 +239,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
+        $user = UsersModel::where('id', '=', $id)->first();
         $lowongan = LowonganModels::all();
-        return view('/super-admin/showAllLowongan', ['data' => $lowongan], compact('admin'));
+        return view('/super-admin/showAllLowongan', ['data' => $lowongan], compact('user'));
     }
     public function showAllLamaran(Request $request, $id)
     {
@@ -243,9 +250,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
+        $user = UsersModel::where('id', '=', $id)->first();
         $lamaran = LamaranModels::all();
-        return view('/super-admin/showAllLamaran', ['data' => $lamaran], compact('admin'));
+        return view('/super-admin/showAllLamaran', ['data' => $lamaran], compact('user'));
     }
     public function showAllPemagangAktif(Request $request, $id)
     {
@@ -259,8 +266,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
+        $user = UsersModel::where('id', '=', $id)->first();
         $aktif = pemagang_aktif::all();
-        return view('/super-admin/showAllPemagangAktif', ['data' => $aktif]);
+        return view('/super-admin/showAllPemagangAktif', ['data' => $aktif], compact('user'));
     }
     public function showAllPemagangInAktif(Request $request, $id)
     {
@@ -269,10 +277,9 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
-
+        $user = UsersModel::where('id', '=', $id)->first();
         $inaktif = pemagang_inaktif::all();
-        return view('/super-admin/showAllPemagangInAktif', ['data' => $inaktif], compact('admin'));
+        return view('/super-admin/showAllPemagangInAktif', ['data' => $inaktif], compact('user'));
     }
     public function showAllPendingCompanies(Request $request, $id)
     {
@@ -281,9 +288,10 @@ class SuperAdminController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = UsersModel::where('id', '=', $id)->first();
+        $user = UsersModel::where('id', '=', $id)->first();
         $pending = CompaniesModel::where('status', '=', 'pending')->get();
-        return view('/super-admin/showAllPendingCompanies', ['data' => $pending], compact('admin'));
+        $pendingCount = CompaniesModel::where('status', '=', 'pending')->count();
+        return view('/super-admin/showAllPendingCompanies', ['data' => $pending, 'pendingCount' => $pendingCount], compact('user'));
     }
     public function showEditUser(Request $request, $id, $idUser)
     {

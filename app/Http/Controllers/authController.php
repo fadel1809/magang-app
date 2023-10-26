@@ -88,7 +88,7 @@ class authController extends Controller
             }
             $oneDay = 60 * 24;
             Cookie::queue('userId', $id, $oneDay);
-            return redirect('/user' . '/' . $id)->withErrors(['message' => 'password checked']);
+            return redirect('/user' . '/' . $id);
         } else {
             return redirect('/login')->withErrors(['message' => 'Password salah']);
         }
@@ -106,9 +106,6 @@ class authController extends Controller
         $password = $requestData['password'];
         $hashedPassword = Hash::make($password, ['rounds' => 12]);
         $requestData['password'] = $hashedPassword;
-        if (UsersModel::count() < 1) {
-            $requestData['role'] = 'superAdmin';
-        }
         $user = UsersModel::create($requestData);
 
         if (!$user) {

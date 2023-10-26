@@ -14,6 +14,8 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="/assets/image/logo-title.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
     <script type="text/javascript" src="main.js"></script>
     <title>Uhamka- Internship</title>
@@ -31,49 +33,23 @@
         
     @endif
     <!--*NavBar-->
-    <section class="navigation">
-        <div class="container">
-            <div class="box-navigation">
-
-
-                <!--Kolom Pertama-->
-                <a href="/">
-                    <div class="box">
-                        <img src="../assets/image/logo.jpg" alt="Internship">
-                    </div>
-                </a>
-                <!--Kolom Pertama-->
-
-                <!--Kolom Kedua-->
-                <div class="menu-navigation">
-                    <ul>
-                        <li>
-                            <a href="">BERANDA</a>
-                            <i class="fa-solid fa-home"></i>
-                        </li>
-                        <li><a href="/Lowongan/Beranda/index.html">LOWONGAN</a>
-                            <i class="fa-sharp fa-solid fa-briefcase"></i>
-                        </li>
-                        <li><a href="">PERUSAHAAN</a>
-                            <i class="fa-sharp fa-solid fa-building"></i>
-                        </li>
-                        <li><a href="">FAQ</a>
-                            <i class="fa-sharp fa-solid fa-user"></i>
-                        </li>
-                        <li><a href="/login"><button class="custom-button">MASUK</button></a>
-
-                        </li>
-                    </ul>
-
-                </div>
-                <!--Kolom Kedua-->
-
-                <!--Kolom Ke 3-->
-                <div class="menu-bar">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </div>
-        </div>
+    <section class="navigation ">
+        <nav class="navbar navbar-expand-lg bg-body-light">
+  <div class="container-fluid container">
+    <a class="navbar-brand" href="/">
+    <img class="logo" src="{{asset('/assets/image/logo.jpg')}}" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto d-flex">
+        
+      </ul>
+      <a href={{route('user.register')}} class="btn btn-outline-primary rounded-5 ml-5 px-4">Daftar</a>
+    </div>
+  </div>
+</nav>
     </section>
     <!--NavBar-->
 
@@ -87,7 +63,7 @@
                     <p>Di dalam program magang kami, Anda akan memiliki peluang untuk menjelajahi industri dan
                         membangun jaringan kontak yang berharga.
                     </p>
-                    <a href="/Lowongan/index.html">
+                    <a href="{{route('user.login')}}">
                         <button>Cari Magang</button>
                     </a>
                 </div>
@@ -145,40 +121,16 @@
     <!--Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
+                
                 <div class="footer-col">
-                    <h4>Uhamka</h4>
-                    <ul>
-                        <li><a href="https://bpti.uhamka.ac.id/">BPTI Uhamka</a></li>
-                        <li><a href="https://uhamka.ac.id">Uhamka Website</a></li>
-                        <li><a href="#">privacy policy</a></li>
-                        <li><a href="#">affiliate program</a></li>
-                    </ul>
 
-                </div>
-                <div class="footer-col">
-                    <h4>get help</h4>
-                    <ul>
-                        <li><a href="/Beranda/index.html">Home</a></li>
-                        <li><a href="/Lowongan/index.html">Lowongan</a></li>
-                        <li><a href="/Beranda/index.html">returns</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Alamat</h4>
-                    <ul>
-                        <li><a href="https://goo.gl/maps/36iLw1LnPdamZCZn7">Uhamka</a></li>
-                        <li><a href="https://goo.gl/maps/opiKZoXB1Jy7Kpqf9">BPTI</a></li>
-
-                </div>
-                <div class="footer-col">
-                    <h4>Developed By.</h4>
-                    <div class="social-links">
+                    <p class="text-center" style="color: white;"><strong>Contact Us</strong></p>
+                    <div class="social-links d-flex justify-content-center">
                         <a href="https://www.facebook.com/bpti.uhamka"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://twitter.com/bpti_uhamka"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/bpti.uhamka/"><i class="fab fa-instagram"></i></a>
                         <a href="https://id.linkedin.com/company/bptiuhamka"><i class="fab fa-linkedin-in"></i></a>
-                        <img src="/assets/image/logo.jpg" alt="Logo">
                     </div>
                 </div>
             </div>

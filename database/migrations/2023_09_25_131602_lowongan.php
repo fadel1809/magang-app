@@ -17,9 +17,8 @@ return new class extends Migration {
             $table->string('name');
             $table->longText('profile')->nullable();
             $table->string('location');
-            $table->foreignId('created_by');
+            $table->unsignedBigInteger('created_by');
             $table->enum('status', ['full', 'available'])->default('available');
-            $table->foreign('created_by')->references('id')->on('companies')->nullable();
             $table->timestamps();
         });
 

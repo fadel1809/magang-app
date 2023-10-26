@@ -72,7 +72,7 @@ class CompanyController extends Controller
                 'profile' => $record->companyProfile,
                 'location' => $record->location
             ]);
-            return redirect('/company' . '/' . $id)->with(['success' => 'lowongan berhasil dibuat']);
+            return redirect(route('dashboard.company', ['id' => $id]))->with(['success' => 'lowongan berhasil dibuat']);
         } catch (\Exception $e) {
             return dd($e);
         }
@@ -107,7 +107,7 @@ class CompanyController extends Controller
             if ($fileExists) {
                 unlink($filePathOld);
             }
-            $photoName = $id . '.' . $photo->getClientOriginalExtension();
+            $photoName = md5($photo->getClientOriginalName()) . '.' . $photo->getClientOriginalExtension();
             if ($photo->move($destination, $photoName)) {
                 DB::table('companies')
                     ->where('id', $id) // Replace 'id' with the column name you want to use for the update condition
@@ -132,7 +132,7 @@ class CompanyController extends Controller
                 'location' => $requestData['location']
             ]);
 
-            return redirect('/company' . '/' . $id)->with(['message' => 'Profil berhasil di edit']);
+            return redirect(route('dashboard.company', ['id' => $id]))->with(['message' => 'Profil berhasil di edit']);
 
         } catch (\Exception $e) {
             //throw $th;
@@ -256,7 +256,12 @@ class CompanyController extends Controller
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
         $user = CompaniesModel::find($id);
-        return view('/admin/homeLoginAdmin', compact('user'));
+        $lowonganCount = LowonganModels::where('created_by', '=', $id)->count();
+        $lamaranCount = LamaranModels::where('company_id', '=', $id)->where('status', '=', 'pending')->count();
+        $lamaranAcceptedCount = LamaranModels::where('company_id', '=', $id)->where('status', '=', 'accepted')->count();
+        $pemagangAktifCount = pemagang_aktif::where('id_company', '=', $id)->count();
+        $pemagangInAktifCount = pemagang_inaktif::where('id_company', '=', $id)->count();
+        return view('/admin/homeLoginAdmin', compact('user'), ['lowonganCount' => $lowonganCount, 'lamaranCount' => $lamaranCount, 'lamaranAcceptedCount' => $lamaranAcceptedCount, 'pemagangAktifCount' => $pemagangAktifCount, 'pemagangInAktifCount' => $pemagangInAktifCount]);
     }
     public function showFormTambahLowongan($id, Request $request)
     {
@@ -275,8 +280,8 @@ class CompanyController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = CompaniesModel::find($id);
-        return view('/admin/editProfileAdmin', compact('admin'));
+        $user = CompaniesModel::find($id);
+        return view('/admin/editProfileAdmin', compact('user'));
     }
 
     public function showEditLowongan($id, $idLowongan, Request $request)
@@ -297,9 +302,9 @@ class CompanyController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
-        $admin = CompaniesModel::find($id);
+        $user = CompaniesModel::find($id);
         $lowongan = LowonganModels::where('created_by', '=', $id)->get();
-        return view('/admin/showLowongan', ['data' => $lowongan], compact('admin'));
+        return view('/admin/showLowongan', ['data' => $lowongan], compact('user'));
     }
     public function showAllLamaran(Request $request, $id)
     {
@@ -308,8 +313,9 @@ class CompanyController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
+        $user = CompaniesModel::find($id);
         $lamaran = LamaranModels::where('company_id', '=', $id)->where('status', '=', 'pending')->get();
-        return view('/admin/showLamaranUser', ['lamaran' => $lamaran]);
+        return view('/admin/showLamaranUser', ['lamaran' => $lamaran], compact('user'));
     }
     public function showAllLamaranAccepted(Request $request, $id)
     {
@@ -318,8 +324,9 @@ class CompanyController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
+        $user = CompaniesModel::find($id);
         $lamaran = LamaranModels::where('company_id', '=', $id)->where('status', '=', 'accepted')->get();
-        return view('/admin/showLamaranUserAccepted', ['lamaran' => $lamaran]);
+        return view('/admin/showLamaranUserAccepted', ['lamaran' => $lamaran], compact('user'));
     }
     public function showAllPemagangAktif(Request $request, $id)
     {
@@ -328,8 +335,9 @@ class CompanyController extends Controller
         if ($idParam !== $idCookie) {
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
+        $user = CompaniesModel::find($id);
         $aktif = pemagang_aktif::where('id_company', '=', $id)->where('status', '=', 'active')->get();
-        return view('/admin/showPemagangAktif', ['data' => $aktif]);
+        return view('/admin/showPemagangAktif', ['data' => $aktif], compact('user'));
     }
     public function showAllPemagangInAktif(Request $request, $id)
     {
@@ -339,7 +347,8 @@ class CompanyController extends Controller
             return redirect('/')->withErrors(['message' => 'autentikasi gagal']);
         }
         $id = intval($id);
+        $user = CompaniesModel::find($id);
         $inaktif = pemagang_inaktif::where('id_company', '=', $id)->get();
-        return view('/admin/showPemagangInAktif')->with('data', $inaktif);
+        return view('/admin/showPemagangInAktif', compact('user'))->with('data', $inaktif);
     }
 }
