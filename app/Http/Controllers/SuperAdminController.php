@@ -208,7 +208,9 @@ class SuperAdminController extends Controller
         $pemagangAktifCount = pemagang_aktif::count();
         $pemagangInAktifCount = pemagang_inaktif::count();
         $companiesCount = CompaniesModel::count();
-        return view('/super-admin/homeLoginSuperAdmin', compact('user'), ['companiesCount' => $companiesCount, 'userCount' => $userCount, 'lowonganCount' => $lowonganCount, 'lamaranCount' => $lamaranCount, 'pemagangAktifCount' => $pemagangAktifCount, 'pemagangInAktifCount' => $pemagangInAktifCount]);
+        $pendingCount = CompaniesModel::where('status', '=', 'pending')->count();
+
+        return view('/super-admin/homeLoginSuperAdmin', compact('user'), ['companiesCount' => $companiesCount, 'userCount' => $userCount, 'lowonganCount' => $lowonganCount, 'lamaranCount' => $lamaranCount, 'pemagangAktifCount' => $pemagangAktifCount, 'pemagangInAktifCount' => $pemagangInAktifCount, 'pendingCount' => $pendingCount]);
     }
     public function showAllUsers(Request $request, $id)
     {

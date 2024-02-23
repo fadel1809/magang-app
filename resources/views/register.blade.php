@@ -75,11 +75,21 @@
                                 <button type="submit" href="login.html" class="btn btn-primary btn-user btn-block">
                                     Daftar
                                 </button>
+                               
+                                <hr>
+                                <div class="mt-3">
+                                                                 <a href="{{route('company.register')}}" class="btn btn-primary btn-user btn-block ">Untuk Perusahaan</a>
+
+                                </div>
+                            
                             </form>
+                            <hr>
+                            
                             <hr>
                             <div class="text-center">
                                 <a class="small" href={{route('user.login')}}>Sudah Punya Akun? Login!</a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

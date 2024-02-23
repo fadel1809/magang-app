@@ -54,6 +54,9 @@
     </section>
     <div class="container bg-light rounded-2 mt-3 shadow p-3 py-4 px-4">
         <h3><strong>Lowongan Tersedia</strong></h3>
+        @if(!isset($lowongan))
+           <h5 style="color: grey;">Tidak ada lowongan untuk saat ini</h5>
+        @endif
         <div class="row">
             <div class="col-lg-6">
         @foreach ($lowongan as $item)

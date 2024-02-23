@@ -242,7 +242,7 @@
                 <td>{{$item->notelp}}</td>
                 <td>{{$item->status}}</td>
                 <td class="d-flex justify-content-center">
-                    <form action={{route('superadmin.accept.companies',['id'=>$admin->id,'idCompany'=>$item->id])}} method="post">
+                    <form action={{route('superadmin.accept.companies',['id'=>$user->id,'idCompany'=>$item->id])}} method="post">
                     @csrf
                     @method('PUT')
                     <button type="submit" class="btn btn-primary">Accept</button>

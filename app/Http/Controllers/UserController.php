@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CustomMiddleware;
@@ -12,12 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-
-
 class UserController extends Controller
 {
-
-
     public function showHomeUser($id, Request $request)
     {
         $idCookie = intval($request->cookie('userId'));
